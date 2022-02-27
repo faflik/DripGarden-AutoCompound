@@ -6,7 +6,7 @@ import dotenv, os, sys
 dotenv.load_dotenv()
 
 HOW_MANY_PLANTS = 1
-MAX_PLANTS = 1000
+MAX_PLANTS = 2000
 MIN_BALANCE = 0.01
 
 # print(dir(contract.functions.plantSeeds))
@@ -45,17 +45,15 @@ def send_transaction():
 
 def main():
     if balance < MIN_BALANCE:
-        print('balance BNB too small')
+        # print('balance BNB too small')
         sys.exit()
         
     if plant_growing >= MAX_PLANTS:
-        print('plant limit reached ')
+        # print('plant limit reached ')
         sys.exit()
         
     if ready_plant() >= HOW_MANY_PLANTS:
         send_transaction()
-    else:
-        print('not enought seed to plant')
 
 
 if __name__ == "__main__":
