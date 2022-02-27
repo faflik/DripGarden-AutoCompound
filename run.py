@@ -3,11 +3,16 @@ import math
 import abi
 import dotenv, os, sys
 
-dotenv.load_dotenv()
+
+
+# absolute path to file e.g. /home/<user>/DripGarden-AutoCompound/
+PATH_TO_FILE = ''
 
 HOW_MANY_PLANTS = 1 # if 1 compound each plant, e.g 5 - wait for 5 plant to compound
 MAX_PLANTS = 2000   # compound to this value and stop
 MIN_BALANCE = 0.01  # minimum account BNB balance below which stop compound
+
+dotenv.load_dotenv(PATH_TO_FILE+'.env')
 
 bsc = "https://bsc-dataseed.binance.org/"
 web3 = Web3(Web3.HTTPProvider(bsc))
@@ -38,7 +43,7 @@ def send_transaction():
     signed_tx = web3.eth.account.sign_transaction(tx, private_key=os.environ['KEY'])
     txn = web3.eth.send_raw_transaction(signed_tx.rawTransaction)
 
-    with open('log.txt','a') as file:
+    with open(PATH_TO_FILE+'log.txt','a') as file:
         file.write(f"Plant: {plant_growing} TX: {web3.toHex(txn)}\n")
 
 
