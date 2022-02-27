@@ -14,6 +14,7 @@ Buy some VPS to run script 24 hours per day, then follow steps below
    - `*/2 * * * * python3 /PATH_TO_FILE/run.py`
 
 5. Configure:
+   - PATH_TO_FILE = '/home/USER/DripGarden-AutoCompound/' # absolute path to working directory
    - HOW_MANY_PLANTS = 1 # if 1 compound each plant, e.g 5 - wait for 5 plant to compound
    - MAX_PLANTS = 2000   # compound to this value and stop
    - MIN_BALANCE = 0.01  # minimum account BNB balance below which stop compound
