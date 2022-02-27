@@ -1,7 +1,7 @@
 from web3 import Web3
 import math
 import abi
-import dotenv, os
+import dotenv, os, sys
 
 dotenv.load_dotenv()
 
@@ -46,11 +46,11 @@ def send_transaction():
 def main():
     if balance < MIN_BALANCE:
         print('balance BNB too small')
-        exit()
+        sys.exit()
         
     if plant_growing >= MAX_PLANTS:
         print('plant limit reached ')
-        exit()
+        sys.exit()
         
     if ready_plant() >= HOW_MANY_PLANTS:
         send_transaction()
