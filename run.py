@@ -3,7 +3,7 @@ import math
 import abi
 import dotenv, os
 
-dotenv.load_dotenv('.env')
+dotenv.load_dotenv()
 
 HOW_MANY_PLANTS = 1
 MAX_PLANTS = 1000
