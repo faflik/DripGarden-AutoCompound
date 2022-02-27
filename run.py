@@ -45,17 +45,17 @@ def send_transaction():
 
 def main():
     if balance < MIN_BALANCE:
-        print('za malo srodkow')
+        print('balance BNB too small')
         exit()
         
     if plant_growing >= MAX_PLANTS:
-        print('koniec')
+        print('plant limit reached ')
         exit()
         
     if ready_plant() >= HOW_MANY_PLANTS:
         send_transaction()
     else:
-        print('za malo')
+        print('not enought seed to plant')
 
 
 if __name__ == "__main__":
