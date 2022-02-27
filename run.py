@@ -5,9 +5,9 @@ import dotenv, os, sys
 
 dotenv.load_dotenv()
 
-HOW_MANY_PLANTS = 1
-MAX_PLANTS = 2000
-MIN_BALANCE = 0.01
+HOW_MANY_PLANTS = 1 # if 1 compound each plant, e.g 5 - wait for 5 plant to compound
+MAX_PLANTS = 2000   # compound to this value and stop
+MIN_BALANCE = 0.01  # minimum account BNB balance below which stop compound
 
 # print(dir(contract.functions.plantSeeds))
 bsc = "https://bsc-dataseed.binance.org/"
