@@ -1,8 +1,11 @@
+from telnetlib import STATUS
+from time import time
 from web3 import Web3
 import math
 import abi
 import dotenv, os, sys
-   
+import datetime
+
 # absolute path to working directory e.g /home/USER/DripGarden-AutoCompound/   
 PATH_TO_FILE = ''
 HOW_MANY_PLANTS = 1 # if 1 compound each plant, e.g 5 - wait for 5 plant to compound
@@ -10,6 +13,9 @@ MAX_PLANTS = 2000   # compound to this value and stop
 MIN_BALANCE = 0.01  # minimum account BNB balance below which stop compound
 
 dotenv.load_dotenv(PATH_TO_FILE+'.env')
+
+# Set time to use in logs later
+now = datetime.datetime.now()
 
 bsc = "https://bsc-dataseed.binance.org/"
 web3 = Web3(Web3.HTTPProvider(bsc))
@@ -43,16 +49,20 @@ def send_transaction():
     txn = web3.eth.send_raw_transaction(signed_tx.rawTransaction)
 
     with open(PATH_TO_FILE+'log.txt','a') as file:
-        file.write(f"Plant: {plant_growing} TX: {web3.toHex(txn)}\n")
-
+        file.write(f"{now} Plant: {plant_growing} TX: {web3.toHex(txn)}\n")
+        
 
 def main():
     if balance < MIN_BALANCE:
         # print('balance BNB too small')
+        with open(PATH_TO_FILE+'log.txt','a') as file:
+            file.write(f"{now} - balance BNB too small\n")
         sys.exit()
         
     if plant_growing >= MAX_PLANTS:
-        # print('plant limit reached ')
+        # print('plant limit reached')
+        with open(PATH_TO_FILE+'log.txt','a') as file:
+            file.write(f"{now} - plant limit reached\n")
         sys.exit()
         
     if ready_plant() >= HOW_MANY_PLANTS:
