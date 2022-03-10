@@ -36,7 +36,7 @@ def send_transaction():
     
     tx = contract.functions.plantSeeds(address).buildTransaction({
         'nonce': nonce,
-        'gas': 2500000,
+        'gas': 100000, # that's enough
         'gasPrice': web3.toWei('5','gwei'),
     })
 
