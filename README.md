@@ -1,4 +1,9 @@
-Buy some VPS to run script 24 hours per day, then follow steps below
+New version:
+ - Added limit LP per day. 
+    Plants below the limit will be planted, above sold 
+
+
+Buy some VPS or Raspberry PI to run script 24 hours per day, then follow steps below
 
 1. `pip install -r requirements.txt`
 
