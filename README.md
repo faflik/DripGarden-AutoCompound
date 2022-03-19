@@ -23,6 +23,7 @@ Buy some VPS or Raspberry PI to run script 24 hours per day, then follow steps b
    - HOW_MANY_PLANTS = 1 # if 1 compound each plant, e.g 5 - wait for 5 plant to compound
    - MAX_PLANTS = 2000   # compound to this value and stop
    - MIN_BALANCE = 0.01  # minimum account BNB balance below which stop compound
+   - LP_DAY = 3.500      # Limit Lp per Day. Below plant seeds, above sell seeds
 
 If this is helpful, send me an airdrop for beer:
  0x74ABf1db8c8b45aD529Bd3012bE1990F605360D6
