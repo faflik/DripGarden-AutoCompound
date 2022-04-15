@@ -1,15 +1,12 @@
 from web3 import Web3
 import math
-import abi
+import abi, config
 import dotenv, os, sys, time
    
 # path to working directory  
 dir_path = os.path.dirname(os.path.realpath(__file__))
 
-HOW_MANY_PLANTS = 1 # if 1 compound each plant, e.g 5 - wait for 5 plant to compound
-MAX_PLANTS = 20000   # compound to this value and stop
-MIN_BALANCE = 0.02  # minimum account BNB balance below which stop compound
-LP_DAY = 3.500      # Limit Lp per Day. Below plant seeds, above sell seeds
+
 
 dotenv.load_dotenv(dir_path + '/.env')
 
@@ -28,7 +25,15 @@ contract = web3.eth.contract(address=contract_adres, abi=abi.ABI)
 
 plant_growing = contract.functions.hatcheryPlants(address).call()
 
-
+with open(dir_path+'/round.txt') as f:
+    no_round = int(f.readline())
+    
+def update_round():
+    global no_round
+    no_round += 1
+    with open(dir_path+'/round.txt', 'w') as f:
+        f.write(f'{no_round}\n')
+          
 def lpDay():
     lp = contract.functions.calculateSeedSell(plant_growing * 86400).call()
     lp_day = (lp*0.95) / 1000000000000000000
@@ -72,21 +77,28 @@ def sellSeed():
 
 
 def main():
-    if balance < MIN_BALANCE:
+    if balance < config.MIN_BALANCE:
         with open(dir_path + '/log.txt','a') as file:
             file.write(f"{time.strftime(format('%d.%m %H:%M'))} Balance too low - {lpDay()} lpDay\n")
         sys.exit()
 
-    if plant_growing >= MAX_PLANTS:
-        with open(dir_path + '/log.txt','a') as file:
-            file.write(f"{time.strftime(format('%d.%m %H:%M'))} Plants limit reached - {lpDay()} lpDay\n")
-        sys.exit()
-
-    if ready_plant() >= HOW_MANY_PLANTS:
-        if lpDay()>=LP_DAY:
-            sellSeed()
+    if ready_plant() >= config.HOW_MANY_PLANTS:
+        if lpDay()>=config.LP_DAY:     
+            try:        
+                if (no_round % config.PERIOD == 0):            
+                    sellSeed()                    
+                    update_round()
+                else:            
+                    plantSeed()
+                    update_round()
+            except:        
+                plantSeed()
+                update_round()                       
         else:
             plantSeed()
+            update_round()
+    else:
+        pass  
 
 if __name__ == "__main__":
     main()
