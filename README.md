@@ -1,4 +1,4 @@
-
+![alt text](https://github.com/faflik/DripGarden-AutoCompound/blob/main/Diagram.png)
 
 Buy some VPS or Raspberry PI to run script 24 hours per day, then follow steps below
 
