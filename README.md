@@ -32,3 +32,7 @@ Buy some VPS or Raspberry PI to run script 24 hours per day, then follow steps b
 
 If this is helpful, send me an airdrop for beer:
  0x74ABf1db8c8b45aD529Bd3012bE1990F605360D6
+ <p align="center"> 
+  Visitor count<br>
+  <img src="https://profile-counter.glitch.me/drip/count.svg" />
+</p>
